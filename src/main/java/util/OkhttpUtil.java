@@ -1,7 +1,6 @@
 package util;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.sun.deploy.util.StringUtils;
 import okhttp3.*;
 
 import javax.net.ssl.SSLContext;
@@ -17,12 +16,10 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-import static jdk.nashorn.internal.runtime.regexp.joni.Config.log;
-
 public class OkhttpUtil {
 
-    private final static String baseUrl = "http://192.168.29.129:2531/v2/api";
-    private final static String token = "30ede1aeb3f6431ea71956a4f9c91bf0";
+    private final static String baseUrl = "http://服务ip:2531/v2/api";
+    private final static String token = "";
 
     public static OkHttpClient okHttpClient() {
         TrustManager[] trustManagers = buildTrustManagers();
@@ -85,6 +82,7 @@ public class OkhttpUtil {
                 throw new RuntimeException(res);
             }
         } catch (Exception e) {
+            System.out.println("url="+baseUrl + route);
             throw new RuntimeException(e);
         }
     }

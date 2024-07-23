@@ -11,8 +11,6 @@ import java.util.List;
  */
 public class ContactApi {
 
-    private static String appId = "wx_BTVoJ_o_r6DpxNCNiycFE";
-
     /**
      *
      * @param appId
