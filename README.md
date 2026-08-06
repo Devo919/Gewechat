@@ -1,236 +1,156 @@
 <p align="center">
-  <img src="logo.png" width="500px" height="350px" alt=" Logo">
+  <img src="logo.png" width="420" alt="Gewechat">
 </p>
 
-# 因相关法律原因，本项目不再维护及可用
+# Gewechat（技术归档）
 
-[针对违规获取及利用微信终端用户数据行为的打击公告](https://mp.weixin.qq.com/s/A6h4ZLTE2EPrY7kJ5fHE2g)
+> [!IMPORTANT]
+> **本项目已停止维护。**
+>
+> Gewechat 的历史运行服务、Docker 镜像、部署方式及技术支持均不再提供。本仓库仅作为技术归档和历史代码示例保留，请勿根据旧教程、旧镜像或第三方分发内容判断项目仍然可用。
 
-## 👉 Gewechat🤖
+停止维护背景可参阅：[针对违规获取及利用微信终端用户数据行为的打击公告](https://mp.weixin.qq.com/s/A6h4ZLTE2EPrY7kJ5fHE2g)。
 
-个人微信开源框架，支持二次开发、任意语言都可接入，Restful API接入。
+## 关于本仓库
 
-### 框架优势：
+Gewechat 曾尝试用 REST API 将个人微信相关能力与具体编程语言、业务框架解耦，让开发者能够把消息事件接入自己的 AI 助手、客服系统或自动化流程。
 
- - 简单易用，无接入难度，区别于其它开源项目，本框架无需用户安装电脑微信，无需安装手机破解插件，只需扫码登录即可使用，操作简单，目前是大厂最稳定的主流使用方案。
+从当前仓库内容看，这里保留的是：
 
-### 主要能力：
+- Java 8 调用示例；
+- 基于 OkHttp 的 HTTP 请求封装；
+- 登录、联系人、群、消息、标签、收藏等 API 模块示例；
+- 一份历史架构图及社区集成索引。
 
-* 消息自动化、给指定对象（好友、群组）发送文本、图片、文件、emoji表情、小程序、语音等消息
-* 自定义消息处理、自动回复、自定义关键字回复、AI回复、各种自定义类型、RPA自动化业务交互
-* 群管理及好友管理、设置好友备注、邀请好友统计、拉好友进群等
-* 各种业务模型接入，例如chatgpt等ai大数据及客服模型
-* 基于框架您可以创造更多有趣的功能...
+这里**不包含完整服务端实现**，也不再提供可运行的底层服务、镜像、安装包、更新或可用性承诺。
 
-<br/>
-<details><summary>免责声明【必读】</summary>
-<br/>
-- 本框架仅供学习和技术研究使用，不得用于任何商业或非法行为，否则后果自负。
+## 项目结构
 
-- 本框架的作者不对本工具的安全性、完整性、可靠性、有效性、正确性或适用性做任何明示或暗示的保证，也不对本工具的使用或滥用造成的任何直接或间接的损失、责任、索赔、要求或诉讼承担任何责任。
-
-- 本框架的作者保留随时修改、更新、删除或终止本工具的权利，无需事先通知或承担任何义务。
-
-- 本框架的使用者应遵守相关法律法规，尊重微信的版权和隐私，不得侵犯微信或其他第三方的合法权益，不得从事任何违法或不道德的行为。
-
-- 本框架的使用者在下载、安装、运行或使用本工具时，即表示已阅读并同意本免责声明。如有异议，请立即停止使用本工具，并删除所有相关文件。
-</details>
-<br/>
-<details><summary>点击查看功能清单</summary><br/>
-  
-+ [x] 登录模块：获取登录二维码、执行登录、设置消息回调地址
-
-+ [x] 联系人模块：获取通讯录列表、获取通讯录信息、搜索好友、添加好友、同意添加好友、删除好友、设置好友仅聊天、设置好友备注
-
-+ [x] 群模块：创建微信群、修改群名称、修改群备注、修改群昵称、邀请/添加入群、删除群成员、退出群聊、解散群聊
-
-+ [x] 消息模块：发送文字/文件/图片/视频/语音/小程序/链接/各类APP消息、转发文件/图片/链接/视频/链接/小程序等、接收各类消息及下载消息内容
-
-+ [x] 标签模块：添加标签、删除标签、标签列表、修改好友标签
-
-+ [x] 个人模块：获取个人资料、获取自己的二维码、隐私设置、修改个人信息、修改头像
-
-+ [x] 收藏夹模块：同步收藏夹、获取收藏夹内容、删除收藏夹
-
-+ [x] 账号管理模块：断线重连、退出微信、检查在线
-</details>
-<br/>
-
-## 🚀 快速入门
-
-### 安装Docker
-
-> Centos Docker安装，已安装Docker可跳过
-
-1、安装gcc相关
-
-```
-yum -y install gcc
-yum -y install gcc-c++
+```text
+src/main/java/
+├── Demo.java                 # 历史调用示例
+├── api/base/                 # 按业务域划分的 API 封装
+│   ├── LoginApi.java
+│   ├── ContactApi.java
+│   ├── GroupApi.java
+│   ├── MessageApi.java
+│   ├── DownloadApi.java       # 媒体下载接口封装
+│   ├── LabelApi.java
+│   ├── FavorApi.java
+│   └── PersonalApi.java
+└── util/OkhttpUtil.java      # HTTP、Token Header 与 JSON 请求封装
 ```
 
-2、配置镜像
+这些代码的主要价值是展示一种轻量的 API Client 分层方式，而不是提供一套当前可部署的微信运行环境。
 
-```
-yum install -y yum-utils
-yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
-yum makecache fast
-```
+> [!WARNING]
+> **历史客户端代码未经过生产级安全加固，不得直接复用。**
+>
+> 当前 `OkhttpUtil.java` 保留了明文 HTTP 占位地址、源码内静态 Token 占位字段、信任所有证书、跳过主机名校验和打印完整响应等历史模式。这些实现只用于理解历史接口分层；生产实现必须使用 HTTPS、标准证书与主机名校验、安全凭证注入，以及敏感日志脱敏。
 
-3、安装docker
+## 历史技术设计
 
-```
-yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-```
+### 1. 用 REST API 隔离业务系统
 
-4、启动docker
+调用方只需要构造 JSON 参数并访问对应路由，不必让业务代码直接依赖某一种机器人框架或开发语言。历史代码中的 API 类基本遵循同一种模式：
 
-```
-systemctl start docker
-# 将docker设置成开机自启动
-systemctl enable docker.service
-```
+```java
+JSONObject param = new JSONObject();
+param.put("appId", appId);
+param.put("toWxid", toWxid);
+param.put("content", content);
 
-### 启动服务
-
-1、拉取镜像
-
-```
- docker pull registry.cn-hangzhou.aliyuncs.com/gewe/gewe:latest
- 
- docker tag registry.cn-hangzhou.aliyuncs.com/gewe/gewe gewe
+return OkhttpUtil.postJSON("/message/postText", param);
 ```
 
-2、运行镜像容器
+这种封装很简单，但边界清楚：业务参数由模块负责，鉴权、序列化和网络请求由公共 Client 负责。
 
-```
-mkdir -p /root/temp
-docker run -itd -v /root/temp:/root/temp -p 2531:2531 -p 2532:2532 --privileged=true --name=gewe gewe /usr/sbin/init
-```
+### 2. 按业务域拆分接口
 
-3、将容器设置成开机运行
+历史接口被拆分为登录、联系人、群、消息、标签、个人资料和收藏等模块。相比把所有路由堆在一个 Client 中，这种划分更容易定位变更，也方便不同业务只依赖自己需要的能力。
 
-```
-docker update --restart=always gewe
-```
+### 3. 用 Webhook 承接异步事件
 
-### API服务调用
+保留的 Java 示例使用同步 HTTP 调用发起发送请求；消息接收及状态变化则通过 Webhook 返回业务系统。一个完整的业务调用链通常包括：
 
-1. API服务调用地址 `http://{服务ip}:2531/v2/api/{接口名}` 
+1. 业务系统发起 REST/JSON 请求；
+2. API 服务完成鉴权、参数处理与能力路由；
+3. 异步事件通过 Webhook 返回；
+4. 业务系统完成幂等、持久化、重试和后续业务处理。
 
-2. 文件下载地址 `http://{服务ip}:2532/download/{接口返回的文件路径}`
+## 历史架构
 
+![Gewechat 历史架构图](liucheng.jpg)
 
+这张图记录的是项目当时的设计思路，不代表当前存在可用的运行服务。当前仓库只保留调用示例，图中的服务端组件并未在本仓库中开源。
 
-## 项目架构设计
+## 工程复盘
 
- <img src="liucheng.jpg" width="600px" height="350px" alt=" Logo">
+如果把即时通信能力接入真实业务，接口数量不是最难的部分。更容易被低估的是下面这些系统问题。
 
-## 基本用法（java示例）
+### 回调幂等与消息去重
 
-- 其他语言执行restful接口可实现相同功能，支持各类语言接入。
- 
-```
- //1、程序部署完成后先获取接口token
- JSONObject token = LoginApi.getToken();
- 
- //2、token获取成功后将token值放入header即可访问api，每个api都需要校验token
- header.put("X-GEWE-TOKEN",token);
- 
- /**
-  *3、 获取登录二维码
-  * @param appId   设备id 首次登录传空，后续登录传返回的appid
-  */
- JSONObject qr = LoginApi.getQr(appid, proxy);
- 
- /**
-  * 4、确认登陆
-  * @param appId
+- 每个事件需要稳定的唯一标识，不能只用消息正文判断重复。
+- Webhook 消费成功后再确认处理结果；业务失败应进入有上限的重试或补偿流程。
+- 同一事件被重复投递时，业务结果必须保持一致。
 
-  * @param uuid       取码返回的uuid
-  * @param captchCode 登录验证码（必须同省登录才能避免此问题，也能使账号更加稳定）
-  */
-  JSONObject jsonObject = LoginApi.checkQr(appId, proxyIp, uuid, captchCode);
-  
-  //5、第四步执行完成则表示微信已登录，执行下列类中的方法可实现不同功能
-  LoginApi.class     //登录模块
-  PersonalApi.class  //个人账号模块
-  ContactApi.class   //联系人模块
-  GroupApi.class     //微信群模块
-  MessageApi.class   //消息模块
-  LabelApi.class     //标签模块
-  FavorApi.class     //收藏夹模块
-```
+### 在线状态与重连
 
-## 注意事项：
+- “接口请求成功”不等于“账号在线”，调用前应区分服务状态、设备状态和账号状态。
+- 登录中、在线、离线、重连中和已退出应使用明确的状态机，不应依靠一个 Boolean 值承载全部状态。
+- 自动重连必须有退避和熔断，避免异常期间形成请求风暴。
 
-- 1、系统环境推荐：Centos7或Ubantu2204
-- 2、硬件环境推荐：4核8G
-- 3、docker版本建议26.1.4，版本过高会导致服务无法启动
-- 4、由于容器需要用到2531和2532端口，要保证服务器这两个端口没有被占用
-- 5、容器启动后会访问腾讯服务，因此要保证服务器能够访问外网，并且出网没有被限制，否则会导致容器无法正常启动
-- 6、使用者必须搭建服务到同省服务器或者电脑里方可正常使用
-- 7、本框架面向个人娱乐使用，请勿用于任何商用场景
+### 超时、限流与可观测性
 
-## 交流群：略
+- HTTP Client 应分别设置连接、读取和整体请求超时。
+- 重试只适用于可安全重复的请求；发送消息等写操作需要幂等键。
+- 日志应记录 request ID、事件 ID、耗时和错误类型，但不应记录 Token、完整联系人资料或敏感消息正文。
+- 对回调积压、失败率、重连次数和接口延迟设置可观测指标。
 
+### Token 与数据安全
 
-## 后续有新版本如何更新
+- Token 不应硬编码在仓库、镜像或日志中，应通过安全配置注入并支持轮换。
+- 回调入口应执行鉴权或验签，并限制来源、请求体大小和访问频率。
+- 联系人、群成员、消息内容等数据应遵循最小收集、最短留存和最小权限原则。
 
-### 更新流程
+### 平台规则优先
 
-```
-1、选择更新版本下载
-2、将文件解压至服务器root目录
-3、执行命令
-    chmod +x install-gewe.sh
-    ./install-gewe.sh
-```
+技术上能够自动化，不代表业务上可以无限制使用。任何自动化系统都需要尊重用户授权、隐私边界、平台规则和适用法律法规，并为人工介入、暂停和审计保留能力。
 
+## 历史生态项目
 
-## 友情链接
-- [dow公益功能](https://github.com/PancrePal-xiaoyibao/dow_gewe_official_xiaoyibao) 基于Dow的公益功能 
-- [dify-on-wechat](https://github.com/hanfangyuan4396/dify-on-wechat) 对chatgpt-on-wechat项目扩展，实现了gewechat channel
-- [Coze-on-Wechat](https://github.com/JC0v0/Coze-on-Wechat)对接 coze 的扩展
-- [rgewe-api](https://github.com/momo402/rgewe-api) 【demo】基于rust语言封装gewechat的api接口，同步API web页面文-
-- [gewechat-python](https://github.com/hanfangyuan4396/gewechat-python) 【demo】python实现的gewechat api接口
-- [LangBot](https://github.com/RockChinQ/langbot) 大模型原生即时通信机器人平台，支持对接 Dify、Coze、DeepSeek 等多种大模型接口
-  --------小功能-----------
-  ### 核心框架与项目
-* [基于Dow的公益功能](https://github.com/PancrePal-xiaoyibao/dow_gewe_official_xiaoyibao)
-* [基于JS的机器人插件](https://github.com/gewechaty/gewechaty)
-* [基于 Dow 优化版本的微信机器人框架](https://github.com/thekingcom666/bot-in-gewe)
-* [基于 Nodejs 实现的插件化架构微信机器人](https://github.com/alonezjh/wechat-bot)
+以下项目曾基于或集成 Gewechat，保留在这里用于技术检索。它们由各自维护者独立负责，本仓库不对其当前可用性、安全性或维护状态作保证。
 
-### 小功能插件
-* [微信语音条 MP3 转 Silk](https://github.com/ledtwo/tosilk)
-* [小天气推送](https://github.com/yussuy/gewe-bot)
-* [关键字搜索 (自动入群)](https://github.com/TryingToDoBetter25/auto_invite_group)
-* [网盘搜索机器人](https://github.com/eternalprogress/PanBot)
-* [消息转发机器人](https://github.com/zzqneo/padbot)
+### SDK 与语言封装
 
-## 版本更新
+- [gewechat-python](https://github.com/hanfangyuan4396/gewechat-python)：Python API 封装示例
+- [rgewe-api](https://github.com/momo402/rgewe-api)：Rust API 封装示例
+- [gewechaty](https://github.com/gewechaty/gewechaty)：Node.js 生态适配项目
 
-### 1.0.2 
+### AI 与机器人集成
 
-* 修复一些bug，历史版本会逐渐失效
-* 更新方式：重新拉镜像部署即可，需注意，每次重新拉就是新设备登录【新设备挂几天在频繁用】
+- [dify-on-wechat](https://github.com/hanfangyuan4396/dify-on-wechat)：Dify 与微信生态集成项目
+- [LangBot](https://github.com/RockChinQ/LangBot)：大模型原生即时通信机器人平台
 
+## 后续技术资料
 
-### 1.0.1
+如果你正在研究新的系统集成，可以根据实际业务对象阅读对应资料：
 
-* 兼容图片下载
-* 更新方式：重新拉镜像部署即可，需注意，本次更新后是新设备登录
+| 开发方向 | 技术资料 | 说明 |
+| --- | --- | --- |
+| 个人微信场景的接口研究与系统集成 | [GeWeAPI 文档](https://doc.geweapi.com/) | 维护的独立技术资料 |
+| 企业微信场景的接口研究与系统集成 | [QiWeAPI 文档](https://doc.qiweapi.com/) | 维护的独立技术资料 |
 
+以上资料不代表 Gewechat 恢复维护，也不代表微信或企业微信官方认可、授权或背书。接入前请自行评估业务必要性、安全性、隐私影响及平台规则。
 
-### 1.0.0
+## 安全与合规
 
-* 正式1.0版本发布
+- 遵守适用的法律法规、平台规则和用户授权要求。
+- 不得将相关技术用于骚扰、批量营销、未经授权的数据收集或其他侵害用户权益的行为。
+- 不得通过技术手段规避平台安全机制、访问控制或风险管理措施。
+- 生产使用前应独立完成安全、隐私与合规评估，并建立数据删除、权限回收和事件审计机制。
+- 使用外部技术资料或第三方生态项目产生的风险，由使用者自行评估和承担。
 
-<details><summary>点击查看更多</summary>
+## License
 
-### 暂无
-
-
-
-
+本仓库保留的历史源代码采用 [Apache License 2.0](LICENSE)。该许可证仅适用于本仓库中的源代码，不延伸至外部服务、第三方项目或平台能力。
